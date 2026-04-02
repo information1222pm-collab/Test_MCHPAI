@@ -165,7 +165,7 @@ const HC = {
 
 body {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 9px;
   color: var(--ink);
   background: var(--bg);
   min-height: 100vh;
@@ -235,7 +235,8 @@ body {
 
 /* ═══ PANELS ═══ */
 .panel { display: none; padding: 10px; overflow-y: auto; }
-#dashboard { display: grid !important; }
+#dashboard { display: none; }
+@media (min-width: 960px) { #dashboard { display: grid !important; } }
 .panel.on { display: block; animation: fadeUp 0.2s ease; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
@@ -249,7 +250,7 @@ body {
 }
 .card-glow { box-shadow: var(--glow); border-color: rgba(0,255,136,0.2); }
 .card-red { box-shadow: var(--glowRed); border-color: rgba(255,59,92,0.2); }
-.card-hdr { font-family: var(--head); font-size: 11px; font-weight: 700; color: var(--ink2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.card-hdr { font-family: var(--head); font-size: 9px; font-weight: 700; color: var(--ink2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
 
 /* ═══ POSITION CARDS ═══ */
 .pos-card {
@@ -275,7 +276,7 @@ body {
   animation: fadeIn 0.3s ease;
 }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-.fdot { width: 6px; height: 6px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+.fdot { width: 5px; height: 5px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
 .fdot.buy { background: var(--go); box-shadow: 0 0 6px var(--go); }
 .fdot.sell { background: var(--stop); box-shadow: 0 0 6px var(--stop); }
 .fdot.ml { background: var(--ai); box-shadow: 0 0 6px var(--ai); }
@@ -298,7 +299,7 @@ body {
   margin-bottom: 8px;
 }
 .mlt { font-family: var(--head); font-size: 10px; font-weight: 700; color: var(--ai); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
-.mlrow { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
+.mlrow { display: flex; justify-content: space-between; align-items: center; padding: 2px 0; }
 .mllbl { font-size: 9px; font-weight: 600; color: var(--ink); }
 .mlsub { font-size: 7px; color: var(--ink3); }
 .mlval { font-size: 11px; font-weight: 700; font-family: var(--mono); }
@@ -430,9 +431,9 @@ body {
 .latc .ll { font-size: 6px; color: var(--ink3); text-transform: uppercase; letter-spacing: 1px; }
 #plist { padding: 0; }
 .pcard { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; margin-bottom: 6px; overflow: hidden; word-break: break-word; }
-.pcard .psym { font-family: var(--head); font-size: 12px; font-weight: 700; }
-.pcard .ppnl { font-size: 14px; font-weight: 700; font-family: var(--mono); }
-.pcard .pmeta { font-size: 8px; color: var(--ink3); line-height: 1.6; }
+.pcard .psym { font-family: var(--head); font-size: 9px; font-weight: 700; }
+.pcard .ppnl { font-size: 11px; font-weight: 700; font-family: var(--mono); }
+.pcard .pmeta { font-size: 6px; color: var(--ink3); line-height: 1.6; }
 .pcard .pmeta span { display: inline-block; margin-right: 6px; }
 .pcard .pclose { background: var(--stopBg); border: 1px solid var(--stop); color: var(--stop); padding: 3px 10px; border-radius: 4px; cursor: pointer; font-family: var(--mono); font-size: 8px; font-weight: 700; margin-top: 4px; }
 #wgrid { display: flex; flex-wrap: wrap; gap: 3px; padding: 6px; }
@@ -486,10 +487,10 @@ body {
 .ai-val { font-size: 11px; font-weight: 700; font-family: var(--mono); }
 
 /* ═══ SMART MONEY ITEMS ═══ */
-.sm-item { padding: 6px 0; border-bottom: 1px solid rgba(30,41,59,0.3); }
+.sm-item { padding: 3px 0; border-bottom: 1px solid rgba(30,41,59,0.3); }
 .sm-item:last-child { border-bottom: none; }
-.sm-wallet { font-size: 10px; font-weight: 700; color: var(--ink); }
-.sm-action { font-size: 8px; color: var(--ink3); margin-top: 2px; }
+.sm-wallet { font-size: 8px; font-weight: 700; color: var(--ink); }
+.sm-action { font-size: 6px; color: var(--ink3); margin-top: 2px; }
 .sm-prob { font-weight: 700; }
 
 /* ═══ POSITION CARDS (enhanced) ═══ */
@@ -548,13 +549,13 @@ body {
 .hdr {
   flex-wrap: wrap; gap: 6px; padding: 8px 10px;
 }
-.hdr-logo { font-size: 14px; }
-.hdr-pnl { font-size: 16px; order: -1; width: 100%; text-align: center; padding: 2px 0; }
+.hdr-logo { font-size: 11px; }
+.hdr-pnl { font-size: 14px; order: -1; width: 100%; text-align: center; padding: 4px 0; letter-spacing: -0.5px; }
 .stats-bar { flex-wrap: nowrap; }
-.sc { flex: 1; min-width: 0; padding: 6px 2px; }
-.sc .v { font-size: 11px; }
+.sc { flex: 1; min-width: 0; padding: 3px 1px; }
+.sc .v { font-size: 9px; }
 .sc .l { font-size: 5px; letter-spacing: 1px; }
-.panel { padding: 8px; }
+.panel { padding: 4px; }
 .dash-grid { grid-template-columns: 1fr; gap: 6px; padding: 6px; }
 
 /* Bottom nav = primary on mobile */
@@ -564,39 +565,39 @@ body {
   padding: 4px 0 6px; gap: 0;
 }
 .nb { padding: 4px 0; flex: 1; min-width: 0; }
-.nb svg { width: 18px; height: 18px; }
+.nb svg { width: 15px; height: 15px; }
 .nb span { font-size: 6px; }
 
 /* Touch targets */
 button, .abtn, .cs-btn, .pclose, .cbrst, .mlfbtn {
-  min-height: 36px; touch-action: manipulation;
+  min-height: 28px; touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
 
 /* Cards compact */
-.dash-card { padding: 10px; margin-bottom: 0; }
-.dash-card-hdr { font-size: 9px; margin-bottom: 6px; padding-bottom: 4px; }
-.mlcard { padding: 8px; margin-bottom: 6px; }
+.dash-card { padding: 6px; margin-bottom: 0; }
+.dash-card-hdr { font-size: 7px; margin-bottom: 6px; padding-bottom: 4px; }
+.mlcard { padding: 5px; margin-bottom: 3px; }
 .pcard { padding: 8px 10px; margin-bottom: 4px; }
 .pcard .psym { font-size: 11px; }
 .pcard .ppnl { font-size: 13px; }
 .pos-card { padding: 8px 10px; margin-bottom: 4px; }
 
 /* Feed items compact */
-.fi { padding: 4px 0; gap: 6px; }
-.ft { font-size: 9px; }
-.fs { font-size: 7px; }
+.fi { padding: 2px 0; gap: 4px; }
+.ft { font-size: 7px; }
+.fs { font-size: 6px; }
 .ftm { font-size: 6px; }
 
 /* Best trade card */
-.bt-title { font-size: 12px; margin-bottom: 8px; }
+.bt-title { font-size: 9px; margin-bottom: 8px; }
 .bt-row { padding: 4px 0; }
-.bt-label { font-size: 10px; }
-.bt-value { font-size: 12px; }
+.bt-label { font-size: 8px; }
+.bt-value { font-size: 9px; }
 
 /* AI rows */
-.ai-row { font-size: 9px; padding: 3px 0; }
-.ai-val { font-size: 10px; }
+.ai-row { font-size: 7px; padding: 2px 0; }
+.ai-val { font-size: 8px; }
 
 /* Settings inputs full width */
 .cs-card { max-width: 100%; }
@@ -609,27 +610,27 @@ button, .abtn, .cs-btn, .pclose, .cbrst, .mlfbtn {
 .cs-sub { font-size: 7px; letter-spacing: 2px; margin-bottom: 16px; }
 
 /* ML panel */
-.mlt { font-size: 9px; }
-.mllbl { font-size: 8px; }
+.mlt { font-size: 8px; }
+.mllbl { font-size: 7px; }
 .mlsub { font-size: 6px; }
-.mlval { font-size: 10px; }
+.mlval { font-size: 8px; }
 
 /* Wallet stats table */
-.wst { font-size: 8px; }
-.wst th { font-size: 6px; padding: 4px 2px; }
-.wst td { padding: 3px 2px; }
+.wst { font-size: 7px; }
+.wst th { font-size: 5px; padding: 2px 1px; }
+.wst td { padding: 2px 1px; }
 
 /* Latency row */
-.latrow { grid-template-columns: repeat(4,1fr); margin-bottom: 4px; }
-.latc .lv { font-size: 10px; }
-.latc .ll { font-size: 5px; }
+.latrow { grid-template-columns: repeat(4,1fr); margin-bottom: 2px; }
+.latc .lv { font-size: 8px; }
+.latc .ll { font-size: 4px; }
 
 /* ── Z FOLD 3 INNER SCREEN (unfolded, ~884px) ── */
 @media (min-width: 600px) {
   .hdr { flex-wrap: nowrap; padding: 10px 16px; }
-  .hdr-pnl { font-size: 18px; order: 0; width: auto; text-align: left; }
-  .hdr-logo { font-size: 16px; }
-  .sc .v { font-size: 12px; }
+  .hdr-pnl { font-size: 14px; order: 0; width: auto; text-align: left; }
+  .hdr-logo { font-size: 12px; }
+  .sc .v { font-size: 10px; }
   .sc .l { font-size: 6px; }
   .panel { padding: 10px 14px; }
   .dash-grid { grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px; }
@@ -657,6 +658,21 @@ button, .abtn, .cs-btn, .pclose, .cbrst, .mlfbtn {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
 }
+
+/* ═══ POSITION CARDS — Z FOLD 3 CLEAN LAYOUT ═══ */
+.pcard {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 5px 8px; margin-bottom: 3px;
+  display: block !important; /* override flex */
+}
+.pcard .psym { font-family: var(--head); font-size: 12px; font-weight: 700; display: inline; }
+.pcard .ppnl { font-size: 14px; font-weight: 700; font-family: var(--mono); float: right; }
+.pcard .pmeta { font-size: 8px; color: var(--ink3); line-height: 1.6; clear: both; padding-top: 4px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.pcard .pclose { display: inline-block; margin-top: 3px; background: var(--stopBg); border: 1px solid var(--stop);
+  color: var(--stop); padding: 4px 12px; border-radius: 4px; cursor: pointer;
+  font-family: var(--mono); font-size: 8px; font-weight: 700; float: right; }
+.pcard::after { content: ''; display: table; clear: both; }
 </style>
 </head>
 <body>
@@ -741,8 +757,8 @@ button, .abtn, .cs-btn, .pclose, .cbrst, .mlfbtn {
     <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
       <span id="h-bal" style="font-size:10px;color:var(--ink2);font-weight:600">0.003 &#x25ce;</span>
       <span id="h-mode" style="font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px;background:var(--goBg);color:var(--go);border:1px solid rgba(0,255,136,0.25)">PAPER</span>
-      <span id="paper-badge" style="display:none;font-size:7px;color:var(--hold)">PAPER</span>
-      <button id="paper-btn" onclick="togglePaper()" style="font-size:7px;padding:2px 6px;background:var(--holdBg);border:1px solid rgba(251,191,36,0.3);color:var(--hold);border-radius:4px;cursor:pointer;font-family:var(--mono);font-weight:600">PAPER: ON</button>
+      <span id="paper-badge" style="display:none"></span>
+      <button id="paper-btn" onclick="togglePaper()" style="font-size:7px;padding:3px 8px;background:var(--holdBg);border:1px solid rgba(251,191,36,0.3);color:var(--hold);border-radius:4px;cursor:pointer;font-family:var(--mono);font-weight:600;min-height:28px">PAPER</button>
       <span id="paper-trade-count" data-n="0" style="font-size:8px;color:var(--hold)"></span>
       <div id="wsbdg" style="display:inline-flex;align-items:center;gap:3px;font-size:7px;padding:2px 6px;border-radius:4px;background:var(--bg3);border:1px solid var(--border)"><div style="width:5px;height:5px;border-radius:50%;background:var(--stop)"></div><span id="wslbl" style="color:var(--ink3)">OFF</span></div>
       <button id="hgear-btn" onclick="openSettings()" style="background:var(--bg3);border:1px solid var(--border);color:var(--ink2);padding:4px 8px;border-radius:4px;cursor:pointer;font-size:11px">&#x2699;</button>
@@ -3658,28 +3674,61 @@ const HMM = (() => {
 // ═══════════════════════════════════════════════════════════════════════════
 
 const ONLINE_SGD = (() => {
-  const NF=20, LR=0.008, MOM=0.92, L2=0.0008, DB_KEY='mchpai_sgd_v3';
-  let w=new Float64Array(NF), b=0, vel=new Float64Array(NF), vb=0, trainCount=0;
+  const NF=28, DB_KEY='mchpai_sgd_v4';
+  let w=new Float64Array(NF), b=0, trainCount=0;
+  // Adam optimizer state
+  let m=new Float64Array(NF), v=new Float64Array(NF), mb=0, vb=0, t_adam=0;
+  const BETA1=0.9, BETA2=0.999, EPS=1e-8, LR=0.005, L2=0.0005;
   const _xBuf=new Float64Array(NF);
-  function loadW(){try{const s=localStorage.getItem(DB_KEY);if(s){const d=JSON.parse(s);if(d.w&&d.w.length===NF){w=new Float64Array(d.w);b=d.b||0;vel=new Float64Array(d.v||new Array(NF).fill(0));vb=d.vb||0;trainCount=d.n||0;}}}catch(e){}}
-  function saveW(){try{localStorage.setItem(DB_KEY,JSON.stringify({w:Array.from(w),b,v:Array.from(vel),vb,n:trainCount}));}catch(e){}}
+
+  function loadW(){try{const s=localStorage.getItem(DB_KEY);if(s){const d=JSON.parse(s);if(d.w&&d.w.length===NF){w=new Float64Array(d.w);b=d.b||0;m=new Float64Array(d.m||new Array(NF).fill(0));v=new Float64Array(d.v||new Array(NF).fill(0));mb=d.mb||0;vb=d.vb||0;trainCount=d.n||0;t_adam=d.t||0;}}}catch(e){}}
+  function saveW(){try{localStorage.setItem(DB_KEY,JSON.stringify({w:Array.from(w),b,m:Array.from(m),v:Array.from(v),mb,vb,n:trainCount,t:t_adam}));}catch(e){}}
   function sigma(z){return z>20?1:z<-20?0:1/(1+Math.exp(-z));}
+
   function buildX(tier,rank,wr7d,pnl7d,bConv,sol,rugP,pumpS,rIdx,rConf,bSize,isLead){
     const x=_xBuf;
-    x[0]=tier==='S'?1:tier==='A'?0.7:tier==='B'?0.4:0.1;x[1]=Math.min(1,rank/500);x[2]=wr7d||0;x[3]=Math.tanh((pnl7d||0)/20);
-    x[4]=Math.min(1,(bConv-1)/2);x[5]=Math.min(1,sol/5);x[6]=1-(rugP||0.15);x[7]=pumpS||0.65;
-    x[8]=rIdx/2;x[9]=rConf||0.33;x[10]=Math.min(1,(bSize||1)/10);x[11]=isLead?1:0;
+    x[0]=tier==='S'?1:tier==='A'?0.7:tier==='B'?0.4:0.1;
+    x[1]=Math.min(1,rank/500);x[2]=wr7d||0;x[3]=Math.tanh((pnl7d||0)/20);
+    x[4]=Math.min(1,(bConv-1)/2);x[5]=Math.min(1,sol/5);x[6]=1-(rugP||0.15);
+    x[7]=pumpS||0.65;x[8]=rIdx/2;x[9]=rConf||0.33;x[10]=Math.min(1,(bSize||1)/10);x[11]=isLead?1:0;
+    // Temporal
     const h=new Date().getUTCHours();x[12]=h/23;x[13]=(h>=13&&h<=21)?1:0;
-    x[14]=S._posCount/Math.max(1,CFG.maxpos);const _tt=S.wins+S.losses;x[15]=_tt>0?S.wins/_tt:0.5;
+    x[14]=S._posCount/Math.max(1,CFG.maxpos);
+    const _tt=S.wins+S.losses;x[15]=_tt>0?S.wins/_tt:0.5;
     x[16]=Math.tanh(S.totalPnl/5);
+    // Darwin
     const _ds=WALLET_DARWIN.getScore(WALLETS.find(ww=>ww.rank===rank)?.addr||'');
     x[17]=_ds?_ds.wr:0.5;x[18]=_ds?Math.min(1,_ds.rugs/2):0;
     x[19]=Math.min(1,(S.risk.consec||0)/CFG.cbLimit);
+    // Feature crosses (interaction terms — nonlinear power)
+    x[20]=x[0]*x[7]; // tier × pumpScore
+    x[21]=x[2]*x[6]; // winRate × (1-rugProb)
+    x[22]=x[5]*x[4]; // solAmount × bundleConv
+    x[23]=x[15]*x[16]; // sessionWR × sessionPnL
+    x[24]=x[0]*x[2]*x[7]; // tier × wr × pump (triple interaction)
+    x[25]=x[9]*x[7]; // regimeConf × pumpScore
+    x[26]=x[17]*x[0]; // darwinWR × tier
+    x[27]=Math.min(1,WALLET_INTENT?WALLET_INTENT.intentScore(WALLETS.find(ww=>ww.rank===rank)?.addr||''):0);
     return x;
   }
   function predict(x){let z=b;for(let i=0;i<NF;i++)z+=w[i]*x[i];return sigma(z);}
-  function train(x,y){const xc=new Float64Array(x);const p=predict(xc),err=p-y;trainCount++;const lr=LR/(1+Math.sqrt(trainCount)*0.01);for(let i=0;i<NF;i++){const g=err*xc[i]+L2*w[i];vel[i]=MOM*vel[i]-lr*g;w[i]+=vel[i];}vb=MOM*vb-lr*err;b+=vb;if(trainCount%5===0)saveW();return p;}
-  function confidence(){return trainCount<10?0:Math.min(1,trainCount/80);}
+
+  // Adam optimizer — adaptive learning rates per parameter
+  function train(x,y){
+    const xc=new Float64Array(x);
+    const p=predict(xc),err=p-y;trainCount++;t_adam++;
+    const lr_t=LR*Math.sqrt(1-Math.pow(BETA2,t_adam))/(1-Math.pow(BETA1,t_adam));
+    for(let i=0;i<NF;i++){
+      const g=err*xc[i]+L2*w[i];
+      m[i]=BETA1*m[i]+(1-BETA1)*g;
+      v[i]=BETA2*v[i]+(1-BETA2)*g*g;
+      w[i]-=lr_t*m[i]/(Math.sqrt(v[i])+EPS);
+    }
+    const gb=err;mb=BETA1*mb+(1-BETA1)*gb;vb=BETA2*vb+(1-BETA2)*gb*gb;
+    b-=lr_t*mb/(Math.sqrt(vb)+EPS);
+    if(trainCount%5===0)saveW();return p;
+  }
+  function confidence(){return trainCount<10?0:Math.min(1,trainCount/60);}
   loadW();
   return{buildX,predict,train,confidence,get trainCount(){return trainCount;},saveWeights:saveW};
 })();
@@ -3689,12 +3738,42 @@ const ONLINE_SGD = (() => {
 // ═══════════════════════════════════════════════════════════════════════════
 
 const WALLET_TRUST = (() => {
-  const DB_KEY='mchpai_wtrust_v2'; let trust={};
+  const DB_KEY='mchpai_wtrust_v3'; let trust={};
   function load(){try{const s=localStorage.getItem(DB_KEY);if(s)trust=JSON.parse(s);}catch(e){}}
   function save(){try{localStorage.setItem(DB_KEY,JSON.stringify(trust));}catch(e){}}
-  function getScore(addr){const t=trust[addr];if(!t)return{score:0.5,n:0,streak:0};return{score:t.a/(t.a+t.b),n:t.n,streak:t.streak};}
-  function update(addr,isWin){if(!trust[addr])trust[addr]={a:2,b:2,n:0,streak:0};const t=trust[addr];if(isWin){t.a+=1;t.streak=Math.max(0,t.streak)+1;}else{t.b+=1;t.streak=Math.min(0,t.streak)-1;}t.n++;if(t.n>50&&t.n%10===0){t.a=Math.max(1,t.a*0.95);t.b=Math.max(1,t.b*0.95);}if(t.n%5===0)save();return getScore(addr);}
-  function isCold(addr){const t=trust[addr];if(!t)return false;return t.streak<=-3||(t.n>=10&&t.a/(t.a+t.b)<0.35);}
+  function getScore(addr){
+    const t=trust[addr];if(!t)return{score:0.5,n:0,streak:0,trend:0};
+    const score=t.a/(t.a+t.b);
+    // Trend: compare recent WR to lifetime WR (positive = improving)
+    const recentWR=t.rw>0&&t.rn>=3?t.rw/t.rn:score;
+    const trend=recentWR-score;
+    return{score,n:t.n,streak:t.streak,trend};
+  }
+  function update(addr,isWin){
+    if(!trust[addr])trust[addr]={a:2,b:2,n:0,streak:0,rw:0,rn:0,lastTs:0};
+    const t=trust[addr];
+    // Time decay: if last trade was >24h ago, decay posterior toward prior
+    const now=Date.now();
+    if(t.lastTs&&(now-t.lastTs)>86400000){
+      const daysSince=(now-t.lastTs)/86400000;
+      const decay=Math.exp(-daysSince/7); // 7-day half-life
+      t.a=Math.max(1,t.a*decay+2*(1-decay));
+      t.b=Math.max(1,t.b*decay+2*(1-decay));
+    }
+    t.lastTs=now;
+    if(isWin){t.a+=1.2;t.streak=Math.max(0,t.streak)+1;t.rw++;}
+    else{t.b+=1.2;t.streak=Math.min(0,t.streak)-1;}
+    t.n++;t.rn++;
+    // Rolling recent window (last 20 trades)
+    if(t.rn>20){t.rw=Math.round(t.rw*0.75);t.rn=Math.round(t.rn*0.75);}
+    // Posterior smoothing at high n
+    if(t.n>60&&t.n%15===0){t.a=Math.max(1,t.a*0.92);t.b=Math.max(1,t.b*0.92);}
+    if(t.n%5===0)save();return getScore(addr);
+  }
+  function isCold(addr){
+    const t=trust[addr];if(!t)return false;
+    return t.streak<=-4||(t.n>=8&&t.a/(t.a+t.b)<0.30);
+  }
   load();return{getScore,update,isCold,save};
 })();
 
@@ -3753,29 +3832,61 @@ const ATR_STOP = (() => {
 // ═══════════════════════════════════════════════════════════════════════════
 
 const NTM = (() => {
-  const MEM_SZ=500,DB_KEY='mchpai_ntm_v2';let memory=[];
+  const MEM_SZ=600,DB_KEY='mchpai_ntm_v3';let memory=[];
   function load(){try{const s=localStorage.getItem(DB_KEY);if(s){memory=JSON.parse(s).map(e=>({sig:new Float64Array(e.sig),outcome:e.outcome,weight:e.weight||1,ts:e.ts||0}));}}catch(e){}}
   function save(){try{localStorage.setItem(DB_KEY,JSON.stringify(memory.map(e=>({sig:Array.from(e.sig),outcome:e.outcome,weight:e.weight,ts:e.ts}))));}catch(e){}}
+
   function buildSignature(tier,bConv,sol,rugP,pumpS,rIdx,wr7d,momR){
     const h=new Date().getUTCHours();
-    return new Float64Array([tier==='S'?1:tier==='A'?0.7:0.3,Math.min(1,(bConv-1)/2),Math.min(1,sol/5),1-rugP,pumpS,rIdx/2,wr7d||0.5,
+    return new Float64Array([
+      tier==='S'?1:tier==='A'?0.7:0.3, Math.min(1,(bConv-1)/2), Math.min(1,sol/5),
+      1-rugP, pumpS, rIdx/2, wr7d||0.5,
       momR==='LAUNCH_PUMP'?1:momR==='STEADY_CLIMB'?0.7:momR==='CONSOLIDATION'?0.4:0.1,
-      h/23,(h>=13&&h<=21)?1:0,S._posCount/Math.max(1,CFG.maxpos),(S.wins+S.losses)>0?S.wins/(S.wins+S.losses):0.5]);
+      h/23, (h>=13&&h<=21)?1:0,
+      S._posCount/Math.max(1,CFG.maxpos),
+      (S.wins+S.losses)>0?S.wins/(S.wins+S.losses):0.5,
+      // v3 additions
+      Math.tanh(S.totalPnl/5), // session momentum
+      Math.min(1,(S.risk.consec||0)/CFG.cbLimit), // CB proximity
+      AGGRESSION?AGGRESSION.getLevel()/2:0.5, // aggression normalized
+      FEE_ENGINE?FEE_ENGINE.failRate:0, // network health
+    ]);
   }
-  function cosine(a,b){let d=0,nA=0,nB=0;for(let i=0;i<a.length;i++){d+=a[i]*b[i];nA+=a[i]*a[i];nB+=b[i]*b[i];}return(nA===0||nB===0)?0:d/(Math.sqrt(nA)*Math.sqrt(nB));}
+
   function query(sig){
     if(memory.length<5)return{score:0.5,matches:0,topSim:0};
     let ws=0,wt=0,matches=0,topSim=0,qN=0;
-    for(let i=0;i<sig.length;i++)qN+=sig[i]*sig[i];qN=Math.sqrt(qN);if(qN===0)return{score:0.5,matches:0,topSim:0};
-    for(let j=0;j<memory.length;j++){const m=memory[j];let dot=0,mN=0;
-      for(let i=0;i<sig.length;i++){dot+=sig[i]*m.sig[i];mN+=m.sig[i]*m.sig[i];}
-      mN=Math.sqrt(mN);if(mN===0)continue;const sim=dot/(qN*mN);
+    for(let i=0;i<sig.length;i++)qN+=sig[i]*sig[i];qN=Math.sqrt(qN);
+    if(qN===0)return{score:0.5,matches:0,topSim:0};
+    const now=Date.now();
+    for(let j=0;j<memory.length;j++){
+      const mm=memory[j];let dot=0,mN=0;
+      for(let i=0;i<sig.length;i++){dot+=sig[i]*mm.sig[i];mN+=mm.sig[i]*mm.sig[i];}
+      mN=Math.sqrt(mN);if(mN===0)continue;
+      const sim=dot/(qN*mN);
       if(sim>topSim)topSim=sim;
-      if(sim>0.7){const ww=sim*m.weight;ws+=(m.outcome>0?1:0)*ww;wt+=ww;matches++;}
+      if(sim>0.65){ // lowered threshold for more matches
+        // Recency boost: recent memories weighted 2x
+        const age=(now-mm.ts)/3600000; // hours
+        const recency=Math.exp(-age/48); // 48h half-life
+        const ww=sim*mm.weight*(0.5+recency);
+        ws+=(mm.outcome>0?1:0)*ww;wt+=ww;matches++;
+      }
     }
     return{score:wt>0?ws/wt:0.5,matches,topSim};
   }
-  function store(sig,isWin,pnlPct){memory.push({sig,outcome:isWin?1:-1,weight:Math.min(2,1+Math.abs(pnlPct)/50),ts:Date.now()});if(memory.length>MEM_SZ){memory.sort((a,b)=>b.weight*(b.ts/Date.now())-a.weight*(a.ts/Date.now()));memory=memory.slice(0,MEM_SZ);}if(memory.length%10===0)save();}
+
+  function store(sig,isWin,pnlPct){
+    // Weight by magnitude of outcome (bigger wins/losses = stronger signal)
+    const w=Math.min(2.5,1+Math.abs(pnlPct)/30);
+    memory.push({sig,outcome:isWin?1:-1,weight:w,ts:Date.now()});
+    if(memory.length>MEM_SZ){
+      // Evict: prioritize removing old + low-weight memories
+      memory.sort((a,b)=>(b.weight*Math.exp(-(Date.now()-b.ts)/172800000))-(a.weight*Math.exp(-(Date.now()-a.ts)/172800000)));
+      memory=memory.slice(0,MEM_SZ);
+    }
+    if(memory.length%10===0)save();
+  }
   load();return{buildSignature,query,store,save,get size(){return memory.length;}};
 })();
 
@@ -3784,13 +3895,51 @@ const NTM = (() => {
 // ═══════════════════════════════════════════════════════════════════════════
 
 const ENSEMBLE = (() => {
-  const DB_KEY='mchpai_ensemble_v1';
-  let weights={onnxRug:0.20,onnxPump:0.20,onlineSGD:0.15,walletTrust:0.15,ntmMemory:0.10,bundleConv:0.10,hmmRegime:0.10};let accuracy={};
+  const DB_KEY='mchpai_ensemble_v2';
+  let weights={onnxRug:0.18,onnxPump:0.18,onlineSGD:0.15,walletTrust:0.12,ntmMemory:0.10,bundleConv:0.10,hmmRegime:0.12,intentScore:0.05};
+  let accuracy={};
   function load(){try{const s=localStorage.getItem(DB_KEY);if(s){const d=JSON.parse(s);if(d.weights)weights=d.weights;if(d.accuracy)accuracy=d.accuracy;}}catch(e){}}
   function save(){try{localStorage.setItem(DB_KEY,JSON.stringify({weights,accuracy}));}catch(e){}}
-  const _KEYS=['onnxRug','onnxPump','onlineSGD','walletTrust','ntmMemory','bundleConv','hmmRegime'];
-  function score(sigs){const vals=[1-(sigs.rugProb||0.15),sigs.pumpScore||0.65,sigs.sgdProb||0.5,sigs.walletScore||0.5,sigs.ntmScore||0.5,Math.min(1,(sigs.bundleConv||1)/3),sigs.regimeBoost||0.5];let ws=0,wt=0;for(let i=0;i<7;i++){const ww=weights[_KEYS[i]]||0.1;ws+=vals[i]*ww;wt+=ww;}return{confidence:Math.max(0,Math.min(1,wt>0?ws/wt:0.5)),components:null};}
-  function recordOutcome(sigs,isWin){const c={onnxRug:1-(sigs.rugProb||0.15)>0.5,onnxPump:(sigs.pumpScore||0.65)>0.5,onlineSGD:(sigs.sgdProb||0.5)>0.5,walletTrust:(sigs.walletScore||0.5)>0.5,ntmMemory:(sigs.ntmScore||0.5)>0.5,bundleConv:(sigs.bundleConv||1)>=1.5,hmmRegime:(sigs.regimeBoost||0.5)>0.5};for(const[k,pred]of Object.entries(c)){if(!accuracy[k])accuracy[k]={correct:0,total:0};accuracy[k].total++;if(pred===isWin)accuracy[k].correct++;}const minT=Math.min(...Object.values(accuracy).map(a=>a.total));if(minT>=20&&minT%20===0){let aS=0;const ac={};for(const[k,a]of Object.entries(accuracy)){ac[k]=Math.max(0.05,a.total>0?a.correct/a.total:0.5);aS+=ac[k];}for(const k of Object.keys(ac))weights[k]=ac[k]/aS;addFeed('ml','\u{1F9E0} ENSEMBLE re-weighted',Object.entries(weights).map(([k,v])=>k.slice(0,4)+':'+(v*100).toFixed(0)+'%').join(' '));}if(minT%5===0)save();}
+
+  const _KEYS=['onnxRug','onnxPump','onlineSGD','walletTrust','ntmMemory','bundleConv','hmmRegime','intentScore'];
+  function score(sigs){
+    const raw=[1-(sigs.rugProb||0.15),sigs.pumpScore||0.65,sigs.sgdProb||0.5,
+      sigs.walletScore||0.5,sigs.ntmScore||0.5,Math.min(1,(sigs.bundleConv||1)/3),
+      sigs.regimeBoost||0.5,sigs.intentScore||0.5];
+    // Nonlinear transform: sigmoid stretch to amplify strong signals
+    const transformed=raw.map(v=>1/(1+Math.exp(-6*(v-0.5)))); // steeper sigmoid
+    // Weighted combination
+    let ws=0,wt=0;
+    for(let i=0;i<_KEYS.length;i++){const ww=weights[_KEYS[i]]||0.1;ws+=transformed[i]*ww;wt+=ww;}
+    // Regime adjustment: boost in euphoria, suppress in fear
+    let regimeAdj=1.0;
+    const regime=HMM.currentRegime();
+    if(regime.name==='EUPHORIA'&&regime.conf>0.5)regimeAdj=1.08;
+    else if(regime.name==='FEAR'&&regime.conf>0.5)regimeAdj=0.88;
+    const conf=Math.max(0,Math.min(1,(wt>0?ws/wt:0.5)*regimeAdj));
+    return{confidence:conf,components:null};
+  }
+
+  function recordOutcome(sigs,isWin){
+    const c={onnxRug:1-(sigs.rugProb||0.15)>0.5,onnxPump:(sigs.pumpScore||0.65)>0.5,
+      onlineSGD:(sigs.sgdProb||0.5)>0.5,walletTrust:(sigs.walletScore||0.5)>0.5,
+      ntmMemory:(sigs.ntmScore||0.5)>0.5,bundleConv:(sigs.bundleConv||1)>=1.5,
+      hmmRegime:(sigs.regimeBoost||0.5)>0.5,intentScore:(sigs.intentScore||0.5)>0.5};
+    for(const[k,pred]of Object.entries(c)){
+      if(!accuracy[k])accuracy[k]={correct:0,total:0};
+      accuracy[k].total++;if(pred===isWin)accuracy[k].correct++;
+    }
+    // Re-weight every 15 trades (faster adaptation)
+    const minT=Math.min(...Object.values(accuracy).map(a=>a.total));
+    if(minT>=15&&minT%15===0){
+      let aS=0;const ac={};
+      for(const[k,a]of Object.entries(accuracy)){
+        ac[k]=Math.max(0.03,a.total>0?a.correct/a.total:0.5);aS+=ac[k];
+      }
+      for(const k of Object.keys(ac))weights[k]=ac[k]/aS;
+    }
+    if(minT%5===0)save();
+  }
   load();return{score,recordOutcome,get weights(){return{...weights};},get accuracy(){return{...accuracy};}};
 })();
 
@@ -4053,82 +4202,66 @@ const FEE_ENGINE = (() => {
 // ═══════════════════════════════════════════════════════════════════════════
 
 const EXIT_MODEL = (() => {
-  const NF=10, LR=0.012, MOM=0.9, L2=0.001, DB_KEY='mchpai_exit_v1';
+  const NF=16, LR=0.01, MOM=0.9, L2=0.001, DB_KEY='mchpai_exit_v2';
   let w=new Float64Array(NF), b=0, vel=new Float64Array(NF), vb=0, trainCount=0;
   const _xBuf=new Float64Array(NF);
-
   function load(){try{const s=localStorage.getItem(DB_KEY);if(s){const d=JSON.parse(s);if(d.w&&d.w.length===NF){w=new Float64Array(d.w);b=d.b||0;vel=new Float64Array(d.v||new Array(NF).fill(0));vb=d.vb||0;trainCount=d.n||0;}}}catch(e){}}
   function save(){try{localStorage.setItem(DB_KEY,JSON.stringify({w:Array.from(w),b,v:Array.from(vel),vb,n:trainCount}));}catch(e){}}
   function sigma(z){return z>20?1:z<-20?0:1/(1+Math.exp(-z));}
 
-  // Build exit feature vector from position state
   function buildX(pos, mint) {
-    const x = _xBuf;
-    const pnlPct = pos.entryPrice>0 ? ((pos.currentPrice-pos.entryPrice)/pos.entryPrice)*100 : 0;
-    const ddPct = pos.highPrice>0 ? ((pos.currentPrice-pos.highPrice)/pos.highPrice)*100 : 0;
-    const holdSecs = (Date.now()-pos.entryTime)/1000;
-    const data = MCTS_POS_DATA[mint];
-    const ticks = data ? data.ticks.length : 0;
-    const buyRatio = data ? data.buyCount/(data.buyCount+data.sellCount||1) : 0.5;
-
-    // Velocity from last 5 ticks
-    let velocity = 0;
-    if (data && data.ticks.length >= 3) {
-      const t = data.ticks, n = t.length;
-      const win = Math.min(5, n);
-      const recent = t.slice(-win);
-      velocity = ((recent[win-1]-recent[0])/(recent[0]||1))/win;
+    const x=_xBuf;
+    const pnlPct=pos.entryPrice>0?((pos.currentPrice-pos.entryPrice)/pos.entryPrice)*100:0;
+    const ddPct=pos.highPrice>0?((pos.currentPrice-pos.highPrice)/pos.highPrice)*100:0;
+    const holdSecs=(Date.now()-pos.entryTime)/1000;
+    const data=MCTS_POS_DATA[mint];
+    const ticks=data?data.ticks.length:0;
+    const buyRatio=data?data.buyCount/(data.buyCount+data.sellCount||1):0.5;
+    let velocity=0,accel=0;
+    if(data&&data.ticks.length>=5){
+      const t=data.ticks,n=t.length,win=Math.min(5,n),recent=t.slice(-win);
+      velocity=((recent[win-1]-recent[0])/(recent[0]||1))/win;
+      if(n>=10){const prev=t.slice(-10,-5);const prevVel=((prev[4]-prev[0])/(prev[0]||1))/5;accel=velocity-prevVel;}
     }
-
-    const regime = HMM.currentRegime();
-
-    x[0] = Math.tanh(pnlPct/50);           // normalized PnL (-1 to 1 range)
-    x[1] = Math.tanh(ddPct/30);             // normalized drawdown
-    x[2] = Math.min(1, holdSecs/600);       // hold time (capped at 10min)
-    x[3] = Math.min(1, ticks/50);           // tick count
-    x[4] = buyRatio;                         // buy pressure
-    x[5] = Math.tanh(velocity*100);          // price velocity
-    x[6] = pos._alphaSold ? 1 : 0;          // alpha already exited
-    x[7] = regime.name==='FEAR' ? 1 : regime.name==='EUPHORIA' ? -0.5 : 0;
-    x[8] = pos.tier==='S' ? 0 : pos.tier==='A' ? 0.3 : 0.6; // worse tier = more exit pressure
-    x[9] = pos._mlVetoed ? 1 : 0;           // ML vetoed this position
+    const regime=HMM.currentRegime();
+    const liqHealth=LIQUIDITY?LIQUIDITY.getHealth(mint):0.5;
+    x[0]=Math.tanh(pnlPct/50);x[1]=Math.tanh(ddPct/30);x[2]=Math.min(1,holdSecs/600);
+    x[3]=Math.min(1,ticks/50);x[4]=buyRatio;x[5]=Math.tanh(velocity*100);
+    x[6]=pos._alphaSold?1:0;x[7]=regime.name==='FEAR'?1:regime.name==='EUPHORIA'?-0.5:0;
+    x[8]=pos.tier==='S'?0:pos.tier==='A'?0.3:0.6;x[9]=pos._mlVetoed?1:0;
+    // v2 features
+    x[10]=Math.tanh(accel*200); // price acceleration
+    x[11]=liqHealth; // liquidity health score
+    x[12]=pnlPct>0&&ddPct<-5?1:0; // was winning, now dropping (reversal flag)
+    x[13]=holdSecs>120&&pnlPct<2?1:0; // held 2min+ with no significant gain (stagnation)
+    x[14]=Math.min(1,ticks/10)*(1-buyRatio); // selling pressure increasing
+    x[15]=pos.conf||0.5; // original entry confidence
     return x;
   }
-
   function predict(x){let z=b;for(let i=0;i<NF;i++)z+=w[i]*x[i];return sigma(z);}
-
-  // Train: y=1 means "should have exited" (loss or held too long), y=0 means "correct to hold"
-  function train(x, y) {
-    const xc = new Float64Array(x);
-    const p = predict(xc), err = p - y; trainCount++;
-    const lr = LR/(1+Math.sqrt(trainCount)*0.01);
+  function train(x,y){
+    const xc=new Float64Array(x);const p=predict(xc),err=p-y;trainCount++;
+    const lr=LR/(1+Math.sqrt(trainCount)*0.008);
     for(let i=0;i<NF;i++){const g=err*xc[i]+L2*w[i];vel[i]=MOM*vel[i]-lr*g;w[i]+=vel[i];}
-    vb=MOM*vb-lr*err;b+=vb;
-    if(trainCount%5===0)save();
-    return p;
+    vb=MOM*vb-lr*err;b+=vb;if(trainCount%5===0)save();return p;
   }
-
-  // Train from closed trade outcome
-  function learnFromClose(pos, mint, pnlPct, holdSecs) {
-    const x = buildX(pos, mint);
-    // Label: should we have exited EARLIER?
-    // If loss > -10% or held > 300s with < +5% gain → should have exited
-    const shouldHaveExited = (pnlPct < -10) || (holdSecs > 300 && pnlPct < 5) ? 1 : 0;
-    return train(x, shouldHaveExited);
+  function learnFromClose(pos,mint,pnlPct,holdSecs){
+    const x=buildX(pos,mint);
+    // Multi-label: should have exited EARLIER if loss>-8% OR stagnated 4min+
+    const shouldHaveExited=(pnlPct<-8)||(holdSecs>240&&pnlPct<3)||(pnlPct<-20)?1:0;
+    return train(x,shouldHaveExited);
   }
-
-  function confidence(){return trainCount<10?0:Math.min(1,trainCount/60);}
-  function shouldExit(pos, mint) {
-    if (trainCount < 15) return { exit: false, score: 0 }; // not enough training
-    const x = buildX(pos, mint);
-    const score = predict(x);
-    // High confidence exit signal
-    if (score > 0.72) return { exit: true, score, reason: 'exit_model_'+score.toFixed(2) };
-    return { exit: false, score };
+  function confidence(){return trainCount<10?0:Math.min(1,trainCount/50);}
+  function shouldExit(pos,mint){
+    if(trainCount<12)return{exit:false,score:0};
+    const x=buildX(pos,mint);const score=predict(x);
+    // Adaptive threshold: stricter for high-confidence entries, looser for low
+    const thresh=pos.conf>0.8?0.78:pos.conf>0.6?0.72:0.65;
+    if(score>thresh)return{exit:true,score,reason:'exit_model_'+score.toFixed(2)};
+    return{exit:false,score};
   }
-
   load();
-  return { buildX, predict, train, learnFromClose, shouldExit, confidence, get trainCount(){return trainCount;} };
+  return{buildX,predict,train,learnFromClose,shouldExit,confidence,get trainCount(){return trainCount;}};
 })();
 
 
@@ -4215,64 +4348,75 @@ const LIQUIDITY = (() => {
 // ═══════════════════════════════════════════════════════════════════════════
 
 const AGGRESSION = (() => {
-  let level = 1.0; // 0.3 = very defensive, 1.0 = normal, 2.0 = max aggressive
-  let _lastCompute = 0;
+  let level=1.0, _lastCompute=0;
+  // Track aggression outcomes for learning
+  const DB_KEY='mchpai_agg_v2';
+  let history=[]; // {level, pnlPct, ts}
+  function load(){try{const s=localStorage.getItem(DB_KEY);if(s)history=JSON.parse(s);}catch(e){}}
+  function save(){try{localStorage.setItem(DB_KEY,JSON.stringify(history.slice(-100)));}catch(e){}}
 
-  function compute() {
-    const now = Date.now();
-    if (now - _lastCompute < 5000) return level; // cache 5s
-    _lastCompute = now;
-
-    let agg = 1.0;
-
+  function compute(){
+    const now=Date.now();
+    if(now-_lastCompute<3000)return level;
+    _lastCompute=now;
+    let agg=1.0;
     // 1. Market regime
-    const regime = HMM.currentRegime();
-    if (regime.name === 'EUPHORIA' && regime.conf > 0.5) agg *= 1.4;
-    else if (regime.name === 'FEAR' && regime.conf > 0.5) agg *= 0.5;
-    else if (regime.name === 'ROTATION') agg *= 0.85;
-
-    // 2. Recent win rate (last 20 trades)
-    const tt = S.wins + S.losses;
-    if (tt >= 10) {
-      const wr = S.wins / tt;
-      if (wr >= 0.65) agg *= 1.3;      // hot streak → press
-      else if (wr < 0.40) agg *= 0.6;   // cold streak → defend
+    const regime=HMM.currentRegime();
+    if(regime.name==='EUPHORIA'&&regime.conf>0.5)agg*=1.4;
+    else if(regime.name==='FEAR'&&regime.conf>0.5)agg*=0.45;
+    else if(regime.name==='ROTATION')agg*=0.8;
+    // 2. Win rate — exponential scaling
+    const tt=S.wins+S.losses;
+    if(tt>=8){const wr=S.wins/tt;
+      if(wr>=0.70)agg*=1.5;
+      else if(wr>=0.60)agg*=1.25;
+      else if(wr<0.35)agg*=0.5;
+      else if(wr<0.45)agg*=0.7;
     }
-
-    // 3. Session P&L momentum
-    if (S.totalPnl > 5) agg *= 1.15;       // winning session → slightly more aggressive
-    else if (S.totalPnl < -2) agg *= 0.7;   // losing session → pull back
-
-    // 4. Consecutive losses proximity to circuit breaker
-    if (S.risk.consec >= CFG.cbLimit - 1) agg *= 0.3; // one loss from CB → go minimal
-
+    // 3. Session P&L — asymmetric (protect losses harder)
+    if(S.totalPnl>8)agg*=1.2;
+    else if(S.totalPnl>3)agg*=1.1;
+    else if(S.totalPnl<-3)agg*=0.5;
+    else if(S.totalPnl<-1)agg*=0.7;
+    // 4. Circuit breaker proximity
+    if(S.risk.consec>=CFG.cbLimit-1)agg*=0.2;
+    else if(S.risk.consec>=CFG.cbLimit-2)agg*=0.5;
     // 5. Position utilization
-    const util = S._posCount / Math.max(1, CFG.maxpos);
-    if (util >= 0.8) agg *= 0.7; // almost full → be selective
-
-    // 6. Time of day (memecoin prime time: US afternoon EST = 17-22 UTC)
-    const h = new Date().getUTCHours();
-    if (h >= 17 && h <= 22) agg *= 1.15;    // prime time
-    else if (h >= 3 && h <= 10) agg *= 0.8;  // dead hours
-
-    level = Math.max(0.3, Math.min(2.0, agg));
+    const util=S._posCount/Math.max(1,CFG.maxpos);
+    if(util>=0.8)agg*=0.6;
+    // 6. Time of day (memecoin prime time)
+    const h=new Date().getUTCHours();
+    if(h>=17&&h<=22)agg*=1.15;
+    else if(h>=3&&h<=10)agg*=0.75;
+    // 7. Learned adjustment from history
+    if(history.length>=10){
+      const recent=history.slice(-20);
+      const highAgg=recent.filter(h=>h.level>1.2);
+      const lowAgg=recent.filter(h=>h.level<0.8);
+      const highWR=highAgg.length?highAgg.filter(h=>h.pnlPct>0).length/highAgg.length:0.5;
+      const lowWR=lowAgg.length?lowAgg.filter(h=>h.pnlPct>0).length/lowAgg.length:0.5;
+      // If aggressive trades win more, stay aggressive
+      if(highWR>0.6&&highWR>lowWR)agg*=1.1;
+      else if(lowWR>0.6&&lowWR>highWR)agg*=0.9;
+    }
+    // 8. TX fail rate (network congestion)
+    if(FEE_ENGINE&&FEE_ENGINE.failRate>0.3)agg*=0.6;
+    level=Math.max(0.2,Math.min(2.5,agg));
     return level;
   }
-
-  // Size multiplier for trades
-  function sizeMult() { return compute(); }
-
-  // Entry threshold adjustment (higher aggression = lower threshold)
-  function entryThreshold(baseThresh) {
-    const agg = compute();
-    // At 2.0 aggression, threshold drops by 0.06
-    // At 0.3 aggression, threshold rises by 0.04
-    return baseThresh - (agg - 1.0) * 0.06;
+  function recordOutcome(pnlPct){
+    history.push({level,pnlPct,ts:Date.now()});
+    if(history.length>100)history=history.slice(-100);
+    if(history.length%10===0)save();
   }
-
-  function getLevel() { return compute(); }
-
-  return { sizeMult, entryThreshold, getLevel };
+  function sizeMult(){return compute();}
+  function entryThreshold(baseThresh){
+    const agg=compute();
+    return baseThresh-(agg-1.0)*0.08; // wider range: ±0.08
+  }
+  function getLevel(){return compute();}
+  load();
+  return{sizeMult,entryThreshold,getLevel,recordOutcome};
 })();
 
 
@@ -6085,7 +6229,7 @@ async function doBuy(mint,sym,w,solAmt,tokAmt,rAt){
 // \u2500\u2500 Execute Sell \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
 async function doSell(mint,reason){
   const pos=S.positions[mint];if(!pos)return;
-  delete S.positions[mint];S._posCount--;
+  delete S.positions[mint];S._posCount=Math.max(0,S._posCount-1);
   cleanMctsPosition(mint); // free MCTS tick data for closed position
   const pnlPct=pos.entryPrice>0?((pos.currentPrice-pos.entryPrice)/pos.entryPrice)*100:0;
   const pnlSOL=pos.sizeSol*(pnlPct/100);
@@ -6104,7 +6248,7 @@ async function doSell(mint,reason){
     if(S.ws?.readyState===1)S.ws.send(WS_UNSUB_TOK(mint));
     S.log.unshift({sym:pos.sym,mint,pnlPct,pnlSOL,reason,holdSecs,win:isWin,ts:Date.now()});
     ATR_STOP.clean(mint);LIQUIDITY.clean(mint);LIQUIDITY.clean(mint);
-    setTimeout(()=>{mlLearnFromTrade(pos,pnlPct,isWin);WALLET_DARWIN.recordOutcome(pos.sourceWallet,isWin,pnlPct,pnlSOL,holdSecs,reason);},0);
+    setTimeout(()=>{mlLearnFromTrade(pos,pnlPct,isWin);WALLET_DARWIN.recordOutcome(pos.sourceWallet,isWin,pnlPct,pnlSOL,holdSecs,reason);if(AGGRESSION.recordOutcome)AGGRESSION.recordOutcome(pnlPct);},0);
     if(S.log.length>200)S.log.pop();
     toast((isWin?'\ud83d\udcc4\ud83d\udcb0':'\ud83d\udcc4\ud83d\udcc9')+' PAPER '+pos.sym+' '+(pnlPct>=0?'+':'')+pnlPct.toFixed(1)+'%',isWin?'close':'loss');
     addFeed(isWin?'win':'loss',' '+(isWin?'\ud83d\udcb0':'\ud83d\udcc9')+' PAPER '+pos.sym+' '+(pnlPct>=0?'+':'')+pnlPct.toFixed(1)+'%',reason+' held '+holdSecs.toFixed(0)+'s '+(pnlSOL>=0?'+':'')+pnlSOL.toFixed(4)+'\u25ce');
@@ -6157,7 +6301,7 @@ async function doSell(mint,reason){
         holdSecs, win:isWin, tier:pos.tier, ts:Date.now() });
       CALIBRATOR.processTrade(mint, pos, pnlPct);
       ATR_STOP.clean(mint);
-      setTimeout(()=>{mlLearnFromTrade(pos,pnlPct,isWin);WALLET_DARWIN.recordOutcome(pos.sourceWallet,isWin,pnlPct,pnlSOL,holdSecs,reason);},0);
+      setTimeout(()=>{mlLearnFromTrade(pos,pnlPct,isWin);WALLET_DARWIN.recordOutcome(pos.sourceWallet,isWin,pnlPct,pnlSOL,holdSecs,reason);if(AGGRESSION.recordOutcome)AGGRESSION.recordOutcome(pnlPct);},0);
     });
   }catch(err){
     console.error('[MCHPai] SELL FAILED:',err.message);
