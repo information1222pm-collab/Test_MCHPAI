@@ -2862,13 +2862,13 @@ async function runML(w,solAmt,tokAmt){
   if(S.mlModels.rug)jobs.push((async()=>{try{
     _onnxBufRug.set(f);try{if(!_onnxTensorRug)_onnxTensorRug=new ort.Tensor('float32',_onnxBufRug,[1,122]);}catch(e){_onnxTensorRug=new ort.Tensor('float32',new Float32Array(f),[1,122]);}
     const out=await S.mlModels.rug.run({float_input:_onnxTensorRug});
-    const p=Object.values(out)[1]?.data||Object.values(out)[0]?.data;
+    const p=out['probability_tensor']?.data||Object.values(out)[1]?.data||Object.values(out)[0]?.data;
     if(p&&p.length>=2)rugProb=p[1];
   }catch(e){}})());
   if(S.mlModels.pump)jobs.push((async()=>{try{
     _onnxBufPump.set(f);try{if(!_onnxTensorPump)_onnxTensorPump=new ort.Tensor('float32',_onnxBufPump,[1,122]);}catch(e){_onnxTensorPump=new ort.Tensor('float32',new Float32Array(f),[1,122]);}
     const out=await S.mlModels.pump.run({float_input:_onnxTensorPump});
-    const p=Object.values(out)[1]?.data||Object.values(out)[0]?.data;
+    const p=out['probability_tensor']?.data||Object.values(out)[1]?.data||Object.values(out)[0]?.data;
     if(p&&p.length>=2)pumpScore=p[1];
   }catch(e){}})());
   if(jobs.length)await Promise.all(jobs);
