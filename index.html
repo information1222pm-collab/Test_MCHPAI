@@ -235,6 +235,7 @@ body {
 
 /* ═══ PANELS ═══ */
 .panel { display: none; padding: 10px; overflow-y: auto; }
+#dashboard { display: grid !important; }
 .panel.on { display: block; animation: fadeUp 0.2s ease; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
@@ -408,17 +409,13 @@ body {
 
 /* ═══ PAPER BADGE ═══ */
 #paper-badge {
-  display: none; position: fixed; top: 46px; left: 0; right: 0; z-index: 99;
-  text-align: center; padding: 3px 0; font-size: 8px; font-weight: 700;
-  background: rgba(251,191,36,0.15); color: var(--hold); letter-spacing: 2px;
+  font-size: 7px; font-weight: 700; color: var(--hold);
+  padding: 2px 6px; border-radius: 3px;
+  background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3);
 }
 
 /* ═══ RESPONSIVE ═══ */
-@media (min-width: 768px) {
-  .hdr { padding: 10px 24px; }
-  .panel { padding: 14px 20px; }
-  #cs { padding: 40px 24px; }
-}
+
 
 /* ═══ LAYOUT IDS ═══ */
 #app { display: flex; flex-direction: column; min-height: 100vh; }
@@ -445,12 +442,220 @@ body {
 #save-indicator { position: fixed; bottom: 10px; left: 10px; font-size: 7px; color: var(--ink3); z-index: 50; }
 #h-tip, #h-sigdelta { font-size: 8px; color: var(--ink3); }
 .hdr-pnl { font-size: 18px; font-weight: 700; font-family: var(--mono); letter-spacing: -0.5px; }
-@media (max-width: 500px) {
-  .hdr { flex-wrap: wrap; gap: 6px; padding: 8px 10px; }
-  .hdr-pnl { font-size: 15px; }
-  .hdr-logo { font-size: 14px; }
-  .stats-bar { flex-wrap: wrap; }
-  .sc { min-width: 50px; }
+
+
+/* ═══ DASHBOARD GRID ═══ */
+.dash-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  padding: 8px;
+}
+
+.dash-col { display: flex; flex-direction: column; gap: 8px; }
+.dash-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+.dash-card-hdr {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--head); font-size: 10px; font-weight: 700;
+  color: var(--ink2); text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 8px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ═══ BEST TRADE CARD ═══ */
+.best-trade-card {
+  border-color: rgba(167,139,250,0.25);
+  background: linear-gradient(180deg, rgba(167,139,250,0.04) 0%, var(--card) 100%);
+}
+.bt-progress { height: 3px; background: var(--border); border-radius: 2px; margin-bottom: 10px; overflow: hidden; }
+.bt-progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--ai), var(--go)); border-radius: 2px; transition: width 1s; }
+.bt-title { font-family: var(--head); font-size: 14px; font-weight: 800; text-align: center; margin-bottom: 12px; letter-spacing: 0.5px; }
+.bt-body { padding: 0 4px; }
+.bt-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid rgba(30,41,59,0.3); }
+.bt-label { font-size: 11px; color: var(--ink2); }
+.bt-value { font-size: 13px; font-weight: 700; font-family: var(--mono); }
+.bt-meta { text-align: center; font-size: 8px; color: var(--ink3); margin-top: 8px; }
+
+/* ═══ AI ANALYSIS ═══ */
+.ai-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; font-size: 10px; color: var(--ink2); }
+.ai-val { font-size: 11px; font-weight: 700; font-family: var(--mono); }
+
+/* ═══ SMART MONEY ITEMS ═══ */
+.sm-item { padding: 6px 0; border-bottom: 1px solid rgba(30,41,59,0.3); }
+.sm-item:last-child { border-bottom: none; }
+.sm-wallet { font-size: 10px; font-weight: 700; color: var(--ink); }
+.sm-action { font-size: 8px; color: var(--ink3); margin-top: 2px; }
+.sm-prob { font-weight: 700; }
+
+/* ═══ POSITION CARDS (enhanced) ═══ */
+.pcard {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 10px 12px; margin-bottom: 6px; overflow: hidden;
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+}
+.pcard.win { border-left: 3px solid var(--go); }
+.pcard.loss { border-left: 3px solid var(--stop); }
+.pcard-left { flex: 1; min-width: 0; }
+.pcard .psym { font-family: var(--head); font-size: 12px; font-weight: 700; }
+.pcard .ppnl { font-size: 16px; font-weight: 700; font-family: var(--mono); }
+.pcard .pmeta { font-size: 7px; color: var(--ink3); line-height: 1.5; word-break: break-word; }
+.pcard .pclose { background: var(--stopBg); border: 1px solid var(--stop); color: var(--stop); padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono); font-size: 7px; font-weight: 700; }
+.pcard-bar { height: 3px; border-radius: 2px; background: var(--border); margin-top: 4px; overflow: hidden; }
+.pcard-bar-fill { height: 100%; border-radius: 2px; }
+
+/* ═══ TAB BUTTONS ═══ */
+.tab {
+  flex: 1; min-width: 0; padding: 10px 6px;
+  background: none; border: none; border-bottom: 2px solid transparent;
+  color: var(--ink3); font-family: var(--mono); font-size: 9px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.tab:hover { color: var(--ink2); }
+.tab.on { color: var(--go); border-bottom-color: var(--go); }
+
+/* ═══ BOTTOM NAV ═══ */
+#bnav {
+  display: flex; justify-content: space-around; align-items: center;
+  padding: 6px 0 8px; background: var(--bg2);
+  border-top: 1px solid var(--border);
+  position: sticky; bottom: 0; z-index: 99;
+}
+.nb {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  background: none; border: none; color: var(--ink3);
+  font-family: var(--mono); font-size: 7px; font-weight: 600;
+  padding: 4px 12px; cursor: pointer; transition: color 0.2s;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.nb svg { width: 20px; height: 20px; }
+.nb:hover { color: var(--ink2); }
+.nb.on { color: var(--go); }
+.nb.on svg { filter: drop-shadow(0 0 4px var(--go)); }
+
+
+/* ═══════════════════════════════════════════════════════════
+   Z FOLD 3 RESPONSIVE — pixel-perfect for all screen modes
+   Cover: ~360px | File viewer: ~490px | Inner: ~884px
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── BASE: Mobile-first (works on cover screen + file viewer) ── */
+.hdr {
+  flex-wrap: wrap; gap: 6px; padding: 8px 10px;
+}
+.hdr-logo { font-size: 14px; }
+.hdr-pnl { font-size: 16px; order: -1; width: 100%; text-align: center; padding: 2px 0; }
+.stats-bar { flex-wrap: nowrap; }
+.sc { flex: 1; min-width: 0; padding: 6px 2px; }
+.sc .v { font-size: 11px; }
+.sc .l { font-size: 5px; letter-spacing: 1px; }
+.panel { padding: 8px; }
+.dash-grid { grid-template-columns: 1fr; gap: 6px; padding: 6px; }
+
+/* Bottom nav = primary on mobile */
+#tabs { display: none; }
+#bnav {
+  display: flex; position: sticky; bottom: 0;
+  padding: 4px 0 6px; gap: 0;
+}
+.nb { padding: 4px 0; flex: 1; min-width: 0; }
+.nb svg { width: 18px; height: 18px; }
+.nb span { font-size: 6px; }
+
+/* Touch targets */
+button, .abtn, .cs-btn, .pclose, .cbrst, .mlfbtn {
+  min-height: 36px; touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Cards compact */
+.dash-card { padding: 10px; margin-bottom: 0; }
+.dash-card-hdr { font-size: 9px; margin-bottom: 6px; padding-bottom: 4px; }
+.mlcard { padding: 8px; margin-bottom: 6px; }
+.pcard { padding: 8px 10px; margin-bottom: 4px; }
+.pcard .psym { font-size: 11px; }
+.pcard .ppnl { font-size: 13px; }
+.pos-card { padding: 8px 10px; margin-bottom: 4px; }
+
+/* Feed items compact */
+.fi { padding: 4px 0; gap: 6px; }
+.ft { font-size: 9px; }
+.fs { font-size: 7px; }
+.ftm { font-size: 6px; }
+
+/* Best trade card */
+.bt-title { font-size: 12px; margin-bottom: 8px; }
+.bt-row { padding: 4px 0; }
+.bt-label { font-size: 10px; }
+.bt-value { font-size: 12px; }
+
+/* AI rows */
+.ai-row { font-size: 9px; padding: 3px 0; }
+.ai-val { font-size: 10px; }
+
+/* Settings inputs full width */
+.cs-card { max-width: 100%; }
+.cs-btn { max-width: 100%; }
+.sm-box { width: 95%; max-width: 100%; max-height: 90vh; }
+
+/* Connect screen */
+#cs { padding: 20px 12px; }
+.cs-logo { font-size: 28px; }
+.cs-sub { font-size: 7px; letter-spacing: 2px; margin-bottom: 16px; }
+
+/* ML panel */
+.mlt { font-size: 9px; }
+.mllbl { font-size: 8px; }
+.mlsub { font-size: 6px; }
+.mlval { font-size: 10px; }
+
+/* Wallet stats table */
+.wst { font-size: 8px; }
+.wst th { font-size: 6px; padding: 4px 2px; }
+.wst td { padding: 3px 2px; }
+
+/* Latency row */
+.latrow { grid-template-columns: repeat(4,1fr); margin-bottom: 4px; }
+.latc .lv { font-size: 10px; }
+.latc .ll { font-size: 5px; }
+
+/* ── Z FOLD 3 INNER SCREEN (unfolded, ~884px) ── */
+@media (min-width: 600px) {
+  .hdr { flex-wrap: nowrap; padding: 10px 16px; }
+  .hdr-pnl { font-size: 18px; order: 0; width: auto; text-align: left; }
+  .hdr-logo { font-size: 16px; }
+  .sc .v { font-size: 12px; }
+  .sc .l { font-size: 6px; }
+  .panel { padding: 10px 14px; }
+  .dash-grid { grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px; }
+  .dash-right { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .bt-title { font-size: 14px; }
+  #cs { padding: 30px 20px; }
+  .cs-logo { font-size: 32px; }
+}
+
+/* ── DESKTOP / LANDSCAPE ── */
+@media (min-width: 960px) {
+  .hdr { padding: 10px 24px; }
+  .dash-grid { grid-template-columns: 240px 1fr 220px; }
+  .dash-right { grid-column: auto; display: flex; }
+  #tabs { display: flex; }
+  #bnav { display: none; }
+  .panel { padding: 14px 20px; }
+}
+
+/* ── TOAST POSITIONING ── */
+#tc { top: auto; bottom: 60px; right: 8px; }
+
+/* ── FORCE HARDWARE ACCELERATION ── */
+#app, #content, .dash-grid, .hdr {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 </style>
 </head>
@@ -552,15 +757,83 @@ body {
   </div>
   <div id="cbb"><span id="cbmsg">CIRCUIT BREAKER HALTED</span><button class="cbrst" onclick="resetCB()">RESET</button></div>
   <div id="tabs" class="nav">
-    <button class="on"  onclick="tab('pos',this)">Positions</button>
-    <button      onclick="tab('feed',this)">Feed</button>
-    <button      onclick="tab('wallets',this)">Wallets</button>
-    <button      onclick="tab('wstats',this)">W.Stats</button>
-    <button      onclick="tab('log',this)">Log</button>
-    <button      onclick="tab('ml',this)">ML</button>
-    <button      onclick="tab('settings',this)">Settings</button>
+    <button class="tab on" onclick="tab('pos',this)">Positions</button>
+    <button class="tab" onclick="tab('feed',this)">Feed</button>
+    <button class="tab" onclick="tab('wallets',this)">Wallets</button>
+    <button class="tab" onclick="tab('wstats',this)">W.Stats</button>
+    <button class="tab" onclick="tab('log',this)">Log</button>
+    <button class="tab" onclick="tab('ml',this)">ML</button>
+    <button class="tab" onclick="tab('settings',this)">Settings</button>
   </div>
   <div id="content">
+
+    <!-- ═══ ELITE DASHBOARD ═══ -->
+    <div id="dashboard" class="dash-grid">
+      <!-- LEFT COLUMN: Live Signals + Smart Money -->
+      <div class="dash-col dash-left">
+        <div class="dash-card">
+          <div class="dash-card-hdr"><span style="color:var(--data)">&#x1F4E1;</span> LIVE SIGNALS <span id="fcnt" style="font-size:8px;color:var(--ink3);margin-left:auto">0</span></div>
+          <div id="flist-dash" style="max-height:200px;overflow-y:auto">
+            <div class="empty">Waiting for signals...</div>
+          </div>
+        </div>
+        <div class="dash-card" style="border-color:rgba(0,255,136,0.15)">
+          <div class="dash-card-hdr"><span style="color:var(--go)">&#x1F4B8;</span> SMART MONEY ACTIVITY</div>
+          <div id="smart-money-list" style="max-height:180px;overflow-y:auto">
+            <div class="empty">Monitoring alpha wallets...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CENTER COLUMN: Best Trade + Active Positions -->
+      <div class="dash-col dash-center">
+        <div class="dash-card best-trade-card" id="best-trade-card">
+          <div class="bt-progress"><div class="bt-progress-bar" id="bt-progress-bar"></div></div>
+          <div class="bt-title">&#x1F525; BEST TRADE RIGHT NOW</div>
+          <div class="bt-body">
+            <div class="bt-row"><span class="bt-label">Token:</span><span class="bt-value" id="bt-token" style="color:var(--ink)">Scanning...</span></div>
+            <div class="bt-row"><span class="bt-label">Entry Score:</span><span class="bt-value" id="bt-score" style="color:var(--go)">--%</span></div>
+            <div class="bt-row"><span class="bt-label">Rug Risk:</span><span class="bt-value" id="bt-rug" style="color:var(--go)">--%</span></div>
+            <div class="bt-row"><span class="bt-label">Momentum:</span><span class="bt-value" id="bt-momentum" style="color:var(--ink2)">--</span></div>
+          </div>
+          <div class="bt-meta" id="bt-meta">Slippage: ~0.5% | Wallets accumulating</div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-hdr"><span style="color:var(--data)">&#x25C9;</span> ACTIVE POSITIONS <span id="pcnt" style="font-size:9px;color:var(--ink);margin-left:auto;font-weight:700">0</span></div>
+          <div id="plist" style="max-height:300px;overflow-y:auto">
+            <div class="empty">No open positions<br>Monitoring alpha wallets...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: AI Analysis + System -->
+      <div class="dash-col dash-right">
+        <div class="dash-card" style="border-color:rgba(167,139,250,0.15)">
+          <div class="dash-card-hdr"><span style="color:var(--ai)">&#x2699;</span> AI ANALYSIS</div>
+          <div class="ai-row"><span>Confidence:</span><span id="ai-conf" class="ai-val" style="color:var(--go)">--</span></div>
+          <div class="ai-row"><span>Predicted ROI:</span><span id="ai-roi" class="ai-val" style="color:var(--data)">--</span></div>
+          <div class="ai-row"><span>Wallet Activity:</span><span id="ai-wallet" class="ai-val" style="color:var(--ink2)">--</span></div>
+          <div class="ai-row"><span>Liquidity Trend:</span><span id="ai-liq" class="ai-val" style="color:var(--ink2)">--</span></div>
+          <div style="margin-top:8px;padding-top:6px;border-top:1px solid var(--border)">
+            <div style="font-size:8px;font-weight:700;color:var(--hold)">&#x26A0; RISK FLAGS</div>
+            <div id="ai-risks" style="font-size:8px;color:var(--ink3);margin-top:3px">No flags</div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-hdr"><span style="color:var(--go)">&#x26A1;</span> SYSTEM</div>
+          <div class="ai-row"><span>Win Rate:</span><span id="sys-wr" class="ai-val" style="color:var(--go)">--%</span></div>
+          <div class="ai-row"><span>Open:</span><span id="sys-open" class="ai-val">0</span></div>
+          <div class="ai-row"><span>Signals:</span><span id="sys-sigs" class="ai-val" style="color:var(--data)">0</span></div>
+          <div class="ai-row"><span>Daily:</span><span id="sys-daily" class="ai-val">0/1000</span></div>
+          <div class="ai-row"><span>ML Systems:</span><span id="sys-ml" class="ai-val" style="color:var(--ai)">12&#215;AI</span></div>
+          <div class="ai-row"><span>Aggression:</span><span id="sys-agg" class="ai-val">1.0x</span></div>
+          <div class="ai-row"><span>Regime:</span><span id="sys-regime" class="ai-val">--</span></div>
+          <div class="ai-row"><span>Engine:</span><span id="sys-engine" class="ai-val" style="font-size:8px">BROWSER</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secondary panels (hidden by default, toggled via bottom nav) -->
 
     <div class="panel on" id="panel-pos">
       <div class="latrow">
@@ -6159,6 +6432,71 @@ function renderUI(){
   if(act?.id==='panel-pos')renderPos();
   if(act?.id==='panel-wstats')renderWStats();
   if(act?.id==='panel-log')renderLog();
+  // ═══ DASHBOARD LIVE UPDATE ═══
+  _updateDashboard();
+}
+
+function _updateDashboard(){
+  // Sync stats to dashboard panels
+  const tt=S.wins+S.losses,wr=tt>0?Math.round(S.wins/tt*100):0;
+  setText('sys-wr',wr+'%');setText('sys-open',S._posCount);setText('sys-sigs',S.signals);
+  setText('sys-daily',S.risk.daily+'/'+CFG.daily);
+  const _onnxOn=Object.keys(S.mlModels).filter(k=>S.mlModels[k]).length;
+  setText('sys-ml',(_onnxOn+12)+'\u00d7AI');
+  setText('sys-agg',AGGRESSION.getLevel().toFixed(2)+'x');
+  const _rg=HMM.currentRegime();setText('sys-regime',_rg.name+' '+(_rg.conf*100).toFixed(0)+'%');
+  setText('sys-engine',ENGINE.isAvailable()?'ONLINE':'BROWSER');
+
+  // AI Analysis panel
+  if(S.mlStats.lastConf!==null)setText('ai-conf',S.mlStats.lastConf>0.7?'HIGH':S.mlStats.lastConf>0.5?'MEDIUM':'LOW');
+  setText('ai-wallet',WALLET_INTENT.sessionCount>10?'SPIKING':WALLET_INTENT.sessionCount>3?'ACTIVE':'QUIET');
+  setText('ai-roi',S.totalPnl>0?(S.totalPnl/Math.max(1,S.wins)).toFixed(1)+'x':'--');
+  setText('ai-liq',_rg.name==='EUPHORIA'?'UP \u2197':_rg.name==='FEAR'?'DOWN \u2198':'FLAT');
+
+  // Risk flags
+  const _risks=[];
+  if(_rg.name==='FEAR')_risks.push('\u{1F534} Market in FEAR regime');
+  if(S.risk.consec>=CFG.cbLimit-1)_risks.push('\u{1F534} Near circuit breaker');
+  if(FEE_ENGINE.failRate>0.2)_risks.push('\u{1F7E0} High TX fail rate: '+(FEE_ENGINE.failRate*100).toFixed(0)+'%');
+  if(wr<40&&tt>=10)_risks.push('\u{1F7E0} Win rate below 40%');
+  const riskEl=document.getElementById('ai-risks');
+  if(riskEl)riskEl.textContent=_risks.length?_risks.join(' \u2022 '):'No flags';
+
+  // Best Trade card (show last signal that passed gate)
+  if(S.mlStats.lastDec&&S.mlStats.lastDec.startsWith('GO')){
+    setText('bt-score',(S.mlStats.lastConf*100).toFixed(0)+'%');
+    setText('bt-rug',((S.mlStats.lastRug||0.15)*100).toFixed(0)+'%');
+    const _bp=document.getElementById('bt-progress-bar');
+    if(_bp)_bp.style.width=(S.mlStats.lastConf*100)+'%';
+  }
+
+  // Smart Money panel (top 5 hottest wallets from WALLET_INTENT)
+  const smEl=document.getElementById('smart-money-list');
+  if(smEl&&WALLET_INTENT.sessionCount>0){
+    const _hotWallets=[];
+    for(const w of WALLETS){
+      const intent=WALLET_INTENT.intentScore(w.addr);
+      const isHot=WALLET_INTENT.isHotSession(w.addr);
+      if(intent>0.3||isHot)_hotWallets.push({w,intent,isHot});
+    }
+    _hotWallets.sort((a,b)=>b.intent-a.intent);
+    const top5=_hotWallets.slice(0,5);
+    if(top5.length){
+      let html='';
+      for(const{w,intent,isHot}of top5){
+        const action=isHot?'Likely to buy soon <span class="sm-prob" style="color:var(--go)">('+Math.round(intent*100)+'%)</span>':'Accumulating pattern';
+        html+='<div class="sm-item"><div class="sm-wallet">\u2022 W#'+w.rank+' ('+w.tier+'-Tier)</div><div class="sm-action">'+action+'</div></div>';
+      }
+      smEl.innerHTML=html;
+    }
+  }
+
+  // Mirror feed to dashboard feed panel
+  const feedDash=document.getElementById('flist-dash');
+  const feedMain=document.getElementById('flist');
+  if(feedDash&&feedMain&&feedMain.innerHTML!==feedDash.innerHTML){
+    feedDash.innerHTML=feedMain.innerHTML;
+  }
 }
 
 // ── renderPos: keyed DOM diffing — only mutates changed position cards ────────
@@ -6854,4 +7192,3 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </body>
 </html>
-
