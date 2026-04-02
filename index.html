@@ -960,6 +960,12 @@ button, .abtn, .cs-btn, .pclose, .cbrst, .mlfbtn {
         <button class="abtn grey" style="margin-bottom:6px" onclick="document.getElementById('rug-file2').click()">Load rug_detector.onnx</button>
         <input type="file" id="pump-file2" class="mlhid" accept=".onnx" onchange="loadModel('pump',this)">
         <button class="abtn grey" onclick="document.getElementById('pump-file2').click()">Load pump_detector.onnx</button>
+        <div style="margin-top:8px;padding-top:6px;border-top:1px solid var(--border)">
+          <div style="font-size:6px;color:var(--ai);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px">FEEDBACK LOOP</div>
+          <div class="mlrow"><div><div class="mllbl">Logged Trades</div><div class="mlsub">Features+outcomes for retraining</div></div><div class="mlval b" id="tl-count2">0</div></div>
+          <button class="abtn go" onclick="TRADE_LOG.download()" style="width:100%;margin-top:3px;justify-content:center;font-size:7px">Export Training Data (CSV)</button>
+          <div style="font-size:5px;color:var(--ink3);margin-top:2px;text-align:center">python3 train_models.py --data trades.csv</div>
+        </div>
       </div>
     </div>
 
@@ -3954,6 +3960,8 @@ function mlLearnFromTrade(pos,pnlPct,isWin){
     const x=ONLINE_SGD.buildX(pos.tier,w.rank,w.wr7d,w.pnl7d,bConv,pos.sizeSol,pos._lastRugProb||0.15,pos._lastPumpScore||0.65,ri.idx,ri.conf,w.bundleSize||1,false);
     ONLINE_SGD.train(x,isWin?1:0);
     EXIT_MODEL.learnFromClose(pos,pos.mint,pnlPct,(Date.now()-pos.entryTime)/1000);
+    // FEEDBACK LOOP: log full feature vector + outcome for offline retraining
+    TRADE_LOG.record(pos,buildFeatures({addr:pos.sourceWallet,tier:pos.tier,rank:pos.walletRank,wr7d:w?.wr7d||0,wr30d:w?.wr30d||0,bundleSize:w?.bundleSize||1},pos.sizeSol*1e9,0),pnlPct,pnlPct*pos.sizeSol/100,(Date.now()-pos.entryTime)/1000,isWin,arguments[2]||'unknown');
     WALLET_TRUST.update(pos.sourceWallet,isWin);
     const mom=MOMENTUM_ML.classify(pos.mint);
     const sig=NTM.buildSignature(pos.tier,bConv,pos.sizeSol,pos._lastRugProb||0.15,pos._lastPumpScore||0.65,ri.idx,w.wr7d||0,mom.regime);
@@ -4626,6 +4634,82 @@ const CORRELATOR = (() => {
   return { record, score, cleanup };
 })();
 
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TRADE FEATURE LOGGER — The feedback loop. Captures every trade's full
+// feature vector + outcome for offline retraining.
+// Export as CSV → train with train_models.py → reload ONNX → improve.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const TRADE_LOG = (() => {
+  const DB_KEY='mchpai_trade_log_v1';
+  let log=[];
+  function load(){try{const s=localStorage.getItem(DB_KEY);if(s)log=JSON.parse(s);}catch(e){}}
+  function save(){try{localStorage.setItem(DB_KEY,JSON.stringify(log.slice(-500)));}catch(e){}}
+
+  // Record a completed trade with full feature vector
+  function record(pos, features, pnlPct, pnlSOL, holdSecs, isWin, reason) {
+    log.push({
+      ts: Date.now(),
+      mint: pos.mint,
+      sym: pos.sym,
+      wallet: pos.sourceWallet?.slice(0,12),
+      tier: pos.tier,
+      rank: pos.walletRank,
+      sizeSol: pos.sizeSol,
+      conf: pos.conf,
+      features: Array.from(features).map(v=>+v.toFixed(6)).join(','),
+      pnl_pct: +pnlPct.toFixed(2),
+      pnl_sol: +pnlSOL.toFixed(4),
+      hold_secs: +holdSecs.toFixed(1),
+      win: isWin ? 1 : 0,
+      reason: reason,
+      regime: HMM.currentRegime().name,
+      aggression: AGGRESSION.getLevel().toFixed(2),
+    });
+    if(log.length%10===0)save();
+  }
+
+  // Export as CSV string
+  function toCSV() {
+    if(!log.length)return '';
+    const headers=['ts','mint','sym','wallet','tier','rank','sizeSol','conf',
+      'features','pnl_pct','pnl_sol','hold_secs','win','reason','regime','aggression'];
+    const rows=[headers.join(',')];
+    for(const entry of log){
+      rows.push(headers.map(h=>{
+        const v=entry[h];
+        if(typeof v==='string'&&v.includes(','))return '"'+v+'"';
+        return v??'';
+      }).join(','));
+    }
+    return rows.join('\n');
+  }
+
+  // Download as CSV file
+  function download() {
+    const csv=toCSV();
+    if(!csv){alert('No trade data yet');return;}
+    const blob=new Blob([csv],{type:'text/csv'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.download='mchpai_trades_'+new Date().toISOString().slice(0,10)+'.csv';
+    a.click();URL.revokeObjectURL(url);
+    toast('Downloaded '+log.length+' trades','ml');
+  }
+
+  // Stats
+  function stats() {
+    if(!log.length)return{total:0,wins:0,wr:0,avgPnl:0};
+    const wins=log.filter(t=>t.win).length;
+    const avgPnl=log.reduce((s,t)=>s+t.pnl_pct,0)/log.length;
+    return{total:log.length,wins,wr:Math.round(wins/log.length*100),avgPnl:+avgPnl.toFixed(2)};
+  }
+
+  load();
+  return{record,toCSV,download,stats,get count(){return log.length;}};
+})();
 
 const WALLET_DARWIN = (() => {
   const DB_KEY = 'mchpai_darwin_v1';
@@ -6540,7 +6624,7 @@ function renderUI(){
   setText('dd-s',S.risk.daily+'/'+CFG.daily);setText('upt',fmtUptime(Date.now()-S.startTime));setText('dedup-s',S.dedup.size);
   // ML panel
   const mAvg=S.mlStats.count>0?S.mlStats.totalMs/S.mlStats.count:0;
-  setText('ml-count',S.mlStats.count);setText('ml-speed',mAvg.toFixed(1)+'ms');setText('ml-blocked',S.mlStats.blocked);
+  setText('ml-count',S.mlStats.count);setText('tl-count',TRADE_LOG.count);setText('ml-speed',mAvg.toFixed(1)+'ms');setText('ml-blocked',S.mlStats.blocked);
   if(S.mlStats.lastRug!==null){setText('ml-last-rug',(S.mlStats.lastRug*100).toFixed(1)+'%');document.getElementById('ml-last-rug').className='mlval '+(S.mlStats.lastRug>0.3?'r':'g');}
   if(S.mlStats.lastPump!==null){setText('ml-last-pump',(S.mlStats.lastPump*100).toFixed(1)+'%');document.getElementById('ml-last-pump').className='mlval '+(S.mlStats.lastPump>0.55?'g':'r');}
   if(S.mlStats.lastConf!==null)setText('ml-last-conf',(S.mlStats.lastConf*100).toFixed(1)+'%');
